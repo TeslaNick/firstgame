@@ -7,7 +7,7 @@ class Cell {
 			parentElement: fieldElement
 		});
 		if (Math.random() > 0.8) {
-			this.value = Math.random() > 0.5 ? 4 : 2;
+			this.spawn();
 		}
 
 		this.element.onclick = this.merge.bind(this);
@@ -26,7 +26,16 @@ class Cell {
 		this.value = '';
 	}
 
-	merge() {
-		this.value *= 2;
+	merge(cell) {
+		this.value += cell.value;
+		cell.clear();
+	}
+
+	spawn() {
+		this.value = Math.random() > 0.5 ? 4 : 2;
+	}
+	
+	get isEmpty() {
+		return this.value == 0;
 	}
 }

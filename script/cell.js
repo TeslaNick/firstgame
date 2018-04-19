@@ -18,6 +18,7 @@ class Cell {
 	set value (value) {
 		this._value = value;
 		this.element.innerHTML = value == 0 ? '' : value;
+		this.element.setAttribute('font', value);
 	}
 
 	clear () {

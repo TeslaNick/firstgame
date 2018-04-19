@@ -30,7 +30,7 @@ html, body {
 	flex-wrap: wrap;
 	height: 80vmin;
 	width: 80vmin;
-	background-color: red;
+	background-color: #fff;
 }
 
 .game .field .cell {
@@ -44,4 +44,55 @@ html, body {
 	border: 2px solid blue;
 	border-radius: 1vmin;
 	font-size: 10vmin;
+	background-image: none;
+	background-position: center;
+	background-repeat: no-repeat;
 }	
+
+.game .field .cell[font = '2'] {
+	background-color: red;
+}
+
+.game .field .cell[font = '4'] {
+	background-color: green;
+}
+
+.game .field .cell[font = '8'] {
+	background-color: yellow;
+}
+
+.game .field .cell[font = '16'] {
+	background-color: blue;
+}
+
+.game .field .cell[font = '32'] {
+	background-color: grey;
+}
+
+.game .field .cell[font = '64'] {
+	background-color: lime;
+}
+
+.game .field .cell[font = '128'] {
+	background-color: aqua;
+}
+
+.game .field .cell[font = '256'] {
+	background-color: olive;
+}
+
+.game .field .cell[font = '512'] {
+	background-color: purple;
+}
+
+.game .field .cell[font = '1024'] {
+	background-color: silver;
+}
+
+.game .field .cell[font = '2048'] {
+	background-color: fuchsia;
+}
+
+.game .field .cell[font = '2'] {
+	background-color: red;
+}

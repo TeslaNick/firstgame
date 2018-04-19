@@ -1,7 +1,8 @@
 
 
 class Cell {
-	constructor(fieldElement) {
+	constructor(fieldElement, game) {
+		this.game = game;
 		this.element = createAndAppend({
 			className: 'cell',
 			parentElement: fieldElement
@@ -27,6 +28,7 @@ class Cell {
 
 	merge(cell) {
 		this.value += cell.value;
+		this.game.onCellMerge(this);
 		cell.clear();
 	}
 

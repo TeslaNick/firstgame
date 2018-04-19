@@ -51,8 +51,8 @@ class Game {
 
 	moveRight() {
 		let hasMoved = false;
-		for (let i = 0; i < this.field.length; i++) {
-			for (let k = this.field[i].length - 2; k>=0; k--){
+		for (let i = 0; i < this.size; i++) {
+			for (let k = this.size - 2; k>=0; k--){
 				let currentCell = this.field[i][k];
 				if (currentCell.isEmpty) {
 					continue;
@@ -60,10 +60,14 @@ class Game {
 				let nextCellKey = k + 1;
 				while(nextCellKey < this.size){
 					let nextCell = this.field[i][nextCellKey];
-					if (!nextCell.isEmpty || (nextCellKey == (this.size - 1))) {
-						if (nextCell.value == currentCell.value && (nextCellKey - 1 != k) || (nextCell.isEmpty && (nextCellKey == (this.size - 1))))  {
+					if (!nextCell.isEmpty || this.isLastKey(nextCellKey)) {
+						if ((nextCell.isEmpty && this.isLastKey(nextCellKey)) 
+							|| nextCell.isSameTo(currentCell)) {
 							this.field[i][nextCellKey].merge(currentCell);
 							hasMoved = true;
+						} else if (!nextCell.isEmpty && (nextCellKey - 1 != k)) {
+							this.field[i][nextCellKey - 1].merge(currentCell);
+							hasMoved = true;	
 						}
 						break;
 					} 
@@ -78,6 +82,46 @@ class Game {
 		}
 	}
 
+	isLastKey(key) {
+		return key == (this.size - 1);
+	}	
+
+	isFirstKey(key) {
+		return key == 0;
+	}
+
+	moveLeft() {
+		let hasMoved = false;
+		for (let i = 0; i < this.size; i++) {
+			for (let k = 1; k < this.size; k++){
+				let currentCell = this.field[i][k];
+				if (currentCell.isEmpty) {
+					continue;
+				}
+				let nextCellKey = k - 1; 
+				while(nextCellKey >= 0){
+					let nextCell = this.field[i][nextCellKey];
+					if (!nextCell.isEmpty || this.isFirstKey(nextCellKey)) {
+						if ((nextCell.isEmpty && this.isFirstKey(nextCellKey)) 
+							|| nextCell.isSameTo(currentCell)) {
+							this.field[i][nextCellKey].merge(currentCell);
+							hasMoved = true;
+						} else if (!nextCell.isEmpty && (nextCellKey + 1 != k)) {
+							this.field[i][nextCellKey + 1].merge(currentCell);
+							hasMoved = true;	
+						}
+						break;
+					} 
+					nextCellKey--;
+					nextCell = this.field[i][nextCellKey];
+				}
+			}			
+		}
+
+		if (hasMoved) {
+			this.spawnUnit();
+		}
+	}
 }
 
 

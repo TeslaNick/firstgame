@@ -31,6 +31,10 @@ class Cell {
 		cell.clear();
 	}
 
+	isSameTo(cell) {
+		return this.value == cell.value;
+	}
+
 	spawn() {
 		this.value = Math.random() > 0.5 ? 4 : 2;
 	}

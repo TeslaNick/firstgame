@@ -28,6 +28,24 @@ class Game {
 				
 			}
 		}
+
+		window.onkeyup = function(e) {
+			switch (e.keyCode){
+				case 38:
+					this.moveUp();
+					break;
+				case 37:
+					this.moveLeft();
+					break;
+				case 40:
+					this.moveDown();
+					break;
+				case 39:
+					this.moveRight();
+					break;
+			}
+		}.bind(this);
+		
 		console.log(this.field);
 	}
 
@@ -146,6 +164,39 @@ class Game {
 						break;
 					} 
 					nextCellKey++;
+					nextCell = this.field[nextCellKey][k];
+				}
+			}			
+		}
+
+		if (hasMoved) {
+			this.spawnUnit();
+		}
+	}
+
+	moveUp() {
+		let hasMoved = false;
+		for (let k = 0; k < this.size; k++){
+			for (let i = 1; i < this.size; i++) {
+				let currentCell = this.field[i][k];
+				if (currentCell.isEmpty) {
+					continue;
+				}
+				let nextCellKey = i - 1; 
+				while(nextCellKey >= 0){
+					let nextCell = this.field[nextCellKey][k];
+					if (!nextCell.isEmpty || this.isFirstKey(nextCellKey)) {
+						if ((nextCell.isEmpty && this.isFirstKey(nextCellKey)) 
+							|| nextCell.isSameTo(currentCell)) {
+							this.field[nextCellKey][k].merge(currentCell);
+							hasMoved = true;
+						} else if (!nextCell.isEmpty && (nextCellKey + 1 != i)) {
+							this.field[nextCellKey + 1][k].merge(currentCell);
+							hasMoved = true;	
+						}
+						break;
+					} 
+					nextCellKey--;
 					nextCell = this.field[nextCellKey][k];
 				}
 			}			

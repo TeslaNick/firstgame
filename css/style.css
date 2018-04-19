@@ -19,14 +19,15 @@ html, body {
 }
 
 .game .header {
-	height: 20vmin;
+	height: 12vmin;
 	width: 80vmin;
 	font-size: 10vmin;
 	box-sizing: border-box;
-	border-bottom: 1px solid blue;
+	color: #c6e84c;
 }
 
 .game .field {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;

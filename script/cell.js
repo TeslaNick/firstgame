@@ -27,8 +27,11 @@ class Cell {
 	}
 
 	merge(cell) {
+		if (this.value) {
+			this.game.addScore(this.value + cell.value);
+		}
 		this.value += cell.value;
-		this.game.onCellMerge(this);
+		
 		cell.clear();
 	}
 

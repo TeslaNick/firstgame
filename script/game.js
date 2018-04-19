@@ -57,6 +57,10 @@ class Game {
 		return this._score;
 	}
 
+	addScore(value) {
+		this.score += value;
+	}
+
 	spawnUnit() {
 		let emptyCells = [];
 		for (let i = 0; i < this.field.length; i++) {
@@ -72,10 +76,6 @@ class Game {
 		} else {
 			alert ('Game over');
 		}
-	}
-
-	onCellMerge(cell) {
-		this.score += cell.value;
 	}
 
 	moveRight() {
